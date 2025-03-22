@@ -1,0 +1,6 @@
+@SCWebService_HostAddress = http://localhost:5276
+
+GET {{SCWebService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
