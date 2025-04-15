@@ -1,16 +1,17 @@
+using SCWebService.Services;
+
+//Load variables from .env into Environment object
+DotNetEnv.Env.Load();
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-DotNetEnv.Env.Load();
 // Add services to the container.
 
+builder.Services.AddSingleton<MongoDBUserService>();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
