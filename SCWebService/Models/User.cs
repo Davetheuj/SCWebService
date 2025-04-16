@@ -16,7 +16,7 @@ namespace SCWebService.Models
         public int wins { get; set; }
         public int losses { get; set; }
         public int draws { get; set; }
-        public object[]? boardPresets { get; set; }
+        public BoardPreset[]? boardPresets { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
         public int __v { get; set; }
