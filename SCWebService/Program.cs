@@ -1,7 +1,8 @@
+using DotNetEnv;
 using SCWebService.Services;
 
 //Load variables from .env into Environment object
-DotNetEnv.Env.Load();
+Env.Load();
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -9,6 +10,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<MongoDBUserService>();
 
 builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

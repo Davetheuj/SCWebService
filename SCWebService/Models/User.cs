@@ -13,6 +13,9 @@ namespace SCWebService.Models
         public string userPassword { get; set; } = string.Empty;
         public string userEmail { get; set; } = string.Empty;
         public int userMMR { get; set; } = 800;
+        public int wins { get; set; }
+        public int losses { get; set; }
+        public int draws { get; set; }
         public object[]? boardPresets { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }

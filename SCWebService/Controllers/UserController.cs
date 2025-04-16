@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SCWebService.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class UserController : ControllerBase
 {
     private readonly MongoDBUserService _userService;
@@ -33,7 +33,7 @@ public class UserController : ControllerBase
         return user;
     }
 
-    [HttpPost]
+    [HttpPost("/add_user")]
     public async Task<IActionResult> Post(User newuser)
     {
         await _userService.CreateAsync(newuser);

@@ -1,7 +1,6 @@
 ﻿using SCWebService.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoDB.Bson;
 
 namespace SCWebService.Services;
 public class MongoDBUserService
