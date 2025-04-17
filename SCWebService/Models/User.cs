@@ -7,8 +7,7 @@ namespace SCWebService.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
-
+        public string? _id { get; set; }
         public string userName { get; set; } = string.Empty;
         public string userPassword { get; set; } = string.Empty;
         public string userEmail { get; set; } = string.Empty;
@@ -19,6 +18,5 @@ namespace SCWebService.Models
         public BoardPreset[]? boardPresets { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
-        public int __v { get; set; }
     }
 }

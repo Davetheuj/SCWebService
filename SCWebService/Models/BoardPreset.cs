@@ -1,10 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace SCWebService.Models
+﻿namespace SCWebService.Models
 {
-    [Serializable]
     public class BoardPreset
     {
-        public SerializableVector3[]? pieces;
+        public SerializableVector3[]? pieces { get; set; }
     }
 }

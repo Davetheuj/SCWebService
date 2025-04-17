@@ -12,18 +12,22 @@ public class MongoDBUserService
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
         _usersCollection = database.GetCollection<User>(mongoDBSettings.Value.CollectionName);
     }
-    public async Task<List<User>> GetAsync() =>
-     await _usersCollection.Find(_ => true).ToListAsync();
-     
-    public async Task<User?> GetAsync(string id) =>
-        await _usersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    public async Task<User?> GetAsyncUnsecured(string userName) =>
+        await _usersCollection.Find(x => x.userName == userName).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(User newUser) =>
+    public async Task<User?> GetAsyncSecure(User user)
+    {
+      return await _usersCollection.Find(x => 
+        x.userName == user.userName && 
+        x.userPassword == user.userPassword)
+        .FirstOrDefaultAsync();
+    }
+
+    public async Task CreateAsync(User newUser)
+    {
         await _usersCollection.InsertOneAsync(newUser);
+    }
 
-    public async Task UpdateAsync(string id, User updatedUser) =>
-        await _usersCollection.ReplaceOneAsync(x => x.Id == id, updatedUser);
-
-    public async Task RemoveAsync(string id) =>
-        await _usersCollection.DeleteOneAsync(x => x.Id == id);
+    public async Task UpdateAsync(User updatedUser) =>
+        await _usersCollection.ReplaceOneAsync(x => x.userName == updatedUser.userName, updatedUser);
 }

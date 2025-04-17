@@ -1,8 +1,9 @@
 ﻿namespace SCWebService.Models
 {
-    [Serializable]
     public class SerializableVector3
     {
-        public int posX, posY, type;
+        public int posX { get; set; }
+        public int posY { get; set; }
+        public int type {  get; set; }
     }
 }

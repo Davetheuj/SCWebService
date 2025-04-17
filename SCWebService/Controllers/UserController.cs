@@ -13,17 +13,30 @@ public class UserController : ControllerBase
     public UserController(MongoDBUserService MongoDBUserService) =>
         _userService = MongoDBUserService;
 
-    [HttpGet]
-    public async Task<List<User>> Get()
+
+    [HttpPost("/register")]
+    public async Task<IActionResult> Post(User newUser)
     {
-        var users = await _userService.GetAsync();
-        return users;
+        //Check if a user already exists with the same userName
+        var user = await _userService.GetAsyncUnsecured(newUser.userName);
+
+        if (user is not null)
+        {
+            var result = new JsonResult("taken");
+            return result;
+        }
+
+        newUser.userMMR = 800;
+
+        await _userService.CreateAsync(newUser);
+
+        return CreatedAtAction(nameof(Get), new { id = newUser._id }, newUser);
     }
 
-    [HttpGet("{id:length(24)}")]
-    public async Task<ActionResult<User>> Get(string id)
+    [HttpPost("/login")]
+    public async Task<ActionResult<User>> Get(User existingUser)
     {
-        var user = await _userService.GetAsync(id);
+        var user = await _userService.GetAsyncSecure(existingUser);
 
         if (user is null)
         {
@@ -33,43 +46,11 @@ public class UserController : ControllerBase
         return user;
     }
 
-    [HttpPost("/add_user")]
-    public async Task<IActionResult> Post(User newuser)
+    [HttpPost("/update_board_preset")]
+    public async Task<IActionResult> UpdateBoardPreset(User updatedUser)
     {
-        await _userService.CreateAsync(newuser);
-
-        return CreatedAtAction(nameof(Get), new { id = newuser.Id }, newuser);
+        await _userService.UpdateAsync(updatedUser);
+        return Accepted();
     }
 
-    [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> Update(string id, User updateduser)
-    {
-        var user = await _userService.GetAsync(id);
-
-        if (user is null)
-        {
-            return NotFound();
-        }
-
-        updateduser.Id = user.Id;
-
-        await _userService.UpdateAsync(id, updateduser);
-
-        return NoContent();
-    }
-
-    [HttpDelete("{id:length(24)}")]
-    public async Task<IActionResult> Delete(string id)
-    {
-        var user = await _userService.GetAsync(id);
-
-        if (user is null)
-        {
-            return NotFound();
-        }
-
-        await _userService.RemoveAsync(id);
-
-        return NoContent();
-    }
 }
