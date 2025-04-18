@@ -1,4 +1,4 @@
-﻿namespace SCWebService.Models
+﻿namespace SCWebService.Models.UserService
 {
     public class BoardPreset
     {

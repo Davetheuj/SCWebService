@@ -1,6 +1,6 @@
-﻿using SCWebService.Models;
-using SCWebService.Services;
+﻿using SCWebService.Services;
 using Microsoft.AspNetCore.Mvc;
+using SCWebService.Models.UserService;
 
 namespace SCWebService.Controllers;
 
@@ -10,8 +10,8 @@ public class UserController : ControllerBase
 {
     private readonly MongoDBUserService _userService;
 
-    public UserController(MongoDBUserService MongoDBUserService) =>
-        _userService = MongoDBUserService;
+    public UserController(MongoDBUserService mongoDBUserService) =>
+        _userService = mongoDBUserService;
 
 
     [HttpPost("/register")]
@@ -49,7 +49,7 @@ public class UserController : ControllerBase
     [HttpPost("/update_board_preset")]
     public async Task<IActionResult> UpdateBoardPreset(User updatedUser)
     {
-        await _userService.UpdateAsync(updatedUser);
+        await _userService.UpdateAsyncSecure(updatedUser);
         return Accepted();
     }
 

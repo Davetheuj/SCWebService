@@ -1,6 +1,7 @@
-﻿using SCWebService.Models;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using SCWebService.MongoDBSettings;
+using SCWebService.Models.UserService;
 
 namespace SCWebService.Services;
 public class MongoDBUserService
@@ -12,8 +13,19 @@ public class MongoDBUserService
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
         _usersCollection = database.GetCollection<User>(mongoDBSettings.Value.CollectionName);
     }
-    public async Task<User?> GetAsyncUnsecured(string userName) =>
-        await _usersCollection.Find(x => x.userName == userName).FirstOrDefaultAsync();
+    public async Task<User?> GetAsyncUnsecured(string userName)
+    {
+        User user = await _usersCollection.Find(x => x.userName == userName).FirstOrDefaultAsync();
+        if(user == null)
+        {
+            return null;
+        }
+        else
+        {
+            user.userPassword = "";
+        }
+        return user;
+    }
 
     public async Task<User?> GetAsyncSecure(User user)
     {
@@ -28,6 +40,12 @@ public class MongoDBUserService
         await _usersCollection.InsertOneAsync(newUser);
     }
 
-    public async Task UpdateAsync(User updatedUser) =>
+    public async Task UpdateAsyncUnsecure(User updatedUser) =>
         await _usersCollection.ReplaceOneAsync(x => x.userName == updatedUser.userName, updatedUser);
+
+    public async Task UpdateAsyncSecure(User updatedUser) =>
+       await _usersCollection.ReplaceOneAsync(x =>
+       x.userName == updatedUser.userName &&
+       x.userPassword == updatedUser.userPassword, 
+       updatedUser);
 }

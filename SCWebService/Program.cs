@@ -5,9 +5,10 @@ using SCWebService.Services;
 Env.Load();
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
 
+// Add services to the container.
 builder.Services.AddSingleton<MongoDBUserService>();
+builder.Services.AddSingleton<MatchmakingService>();
 
 builder.Services.AddControllers();
 
