@@ -18,5 +18,17 @@ namespace SCWebService.Models.UserService
         public BoardPreset[]? boardPresets { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
+
+        public void PurgeSecureData()
+        {
+            userEmail = string.Empty;
+            userPassword = string.Empty;
+        }
+
+        public void SetInitialValues()
+        {
+            createdAt = DateTime.Now;
+            userMMR = 800;
+        }
     }
 }

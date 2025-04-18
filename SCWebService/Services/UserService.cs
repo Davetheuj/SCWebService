@@ -20,10 +20,8 @@ public class UserService
         {
             return null;
         }
-        else
-        {
-            user.userPassword = "";
-        }
+
+        user.PurgeSecureData();
         return user;
     }
 

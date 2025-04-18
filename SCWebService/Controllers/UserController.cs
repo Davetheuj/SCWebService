@@ -26,7 +26,7 @@ public class UserController : ControllerBase
             return result;
         }
 
-        newUser.userMMR = 800;
+        newUser.SetInitialValues();
 
         await _userService.CreateAsync(newUser);
 
