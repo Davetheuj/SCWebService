@@ -8,9 +8,9 @@ namespace SCWebService.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly MongoDBUserService _userService;
+    private readonly UserService _userService;
 
-    public UserController(MongoDBUserService mongoDBUserService) =>
+    public UserController(UserService mongoDBUserService) =>
         _userService = mongoDBUserService;
 
 

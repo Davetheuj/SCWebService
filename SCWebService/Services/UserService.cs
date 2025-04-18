@@ -4,10 +4,10 @@ using SCWebService.MongoDBSettings;
 using SCWebService.Models.UserService;
 
 namespace SCWebService.Services;
-public class MongoDBUserService
+public class UserService
 {
     private readonly IMongoCollection<User> _usersCollection;
-    public MongoDBUserService(IOptions<MongoDBUserSettings> mongoDBSettings)
+    public UserService(IOptions<MongoDBUserSettings> mongoDBSettings)
     {
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);

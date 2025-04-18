@@ -16,9 +16,9 @@ namespace SCWebService.Controllers
             _matchmakingService = matchmakingService;
 
         [HttpPost("/find_match")]
-        public async Task<IActionResult> Get([FromBody] string userName, [FromBody] int userMMR)
+        public async Task<IActionResult> Get(MatchmakingUser user)
         {
-            var mmUser = await _matchmakingService.FindValidHostAsync(userName, userMMR);
+            var mmUser = await _matchmakingService.FindValidHostAsync(user.UserName, user.UserMMR);
             
             JsonResult result = new JsonResult("");
 
