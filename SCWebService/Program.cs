@@ -12,6 +12,14 @@ builder.Services.AddSingleton<MatchmakingService>();
 
 builder.Services.AddControllers();
 
+//Allow access from ITCH
+builder.Services.AddCors(options => {
+    options.AddPolicy(
+        "AllowSpecificOrigin", policy => policy.WithOrigins("https://html-classic.itch.zone").
+        AllowAnyHeader().
+        AllowAnyMethod());
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
 
 app.UseAuthorization();
 
