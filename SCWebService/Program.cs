@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 //Allow access from ITCH
 builder.Services.AddCors(options => {
     options.AddPolicy(
-        "AllowSpecificOrigin", policy => policy.WithOrigins("https://html-classic.itch.zone").
+        "AllowSpecificOrigin", policy => policy.WithOrigins("https://html-classic.itch.zone/").
         AllowAnyHeader().
         AllowAnyMethod());
 });
