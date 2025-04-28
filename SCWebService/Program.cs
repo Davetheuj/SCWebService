@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<MatchmakingService>();
+builder.Services.AddSingleton<RankedMatchmakingService>();
 
 builder.Services.AddControllers();
 

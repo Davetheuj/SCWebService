@@ -7,16 +7,16 @@ namespace SCWebService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MatchmakingController : ControllerBase
+    public class RankedMatchmakingController : ControllerBase
     {
 
-        private readonly MatchmakingService _matchmakingService;
+        private readonly RankedMatchmakingService _matchmakingService;
 
-        public MatchmakingController(MatchmakingService matchmakingService) =>
+        public RankedMatchmakingController(RankedMatchmakingService matchmakingService) =>
             _matchmakingService = matchmakingService;
 
-        [HttpPost("/find_match")]
-        public async Task<IActionResult> Get(MatchmakingUser user)
+        [HttpPost("/ranked_mm/find_match")]
+        public async Task<IActionResult> Get(RankedMatchmakingUser user)
         {
             var mmUser = await _matchmakingService.FindValidHostAsync(user.UserName, user.UserMMR);
             
@@ -35,18 +35,18 @@ namespace SCWebService.Controllers
             return result;
         }
 
-        [HttpPost("/add_host")]
-        public async Task<IActionResult> Post(MatchmakingUser mmUser)
+        [HttpPost("/ranked_mm/add_host")]
+        public async Task<IActionResult> Post(RankedMatchmakingUser mmUser)
         {
             await _matchmakingService.CreateAsync(mmUser);
             return Accepted();
         }
      
 
-        [HttpPost("/remove_from_queue")]
-        public async Task<IActionResult> RemoveFromQueue(MatchmakingUser mmUser)
+        [HttpPost("/ranked_mm/remove_from_queue")]
+        public async Task<IActionResult> RemoveFromQueue(string username)
         {
-            bool success = await _matchmakingService.TryRemoveFromQueue(mmUser);
+            bool success = await _matchmakingService.TryRemoveFromQueue(username);
             if (success)
             {
                 return Accepted();

@@ -7,7 +7,7 @@ namespace SCWebService.Services;
 public class UserService
 {
     private readonly IMongoCollection<User> _usersCollection;
-    public UserService(IOptions<MongoDBUserSettings> mongoDBSettings)
+    public UserService(IOptions<UserSettings> mongoDBSettings)
     {
         MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionURI);
         IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
