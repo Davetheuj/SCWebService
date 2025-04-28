@@ -20,12 +20,13 @@ namespace SCWebService.Services
 
         public async Task CreateAsync(RankedMatchmakingUser newUser)
         {
+            await _matchmakingCollection.DeleteManyAsync(x => x.UserName == newUser.UserName);
             await _matchmakingCollection.InsertOneAsync(newUser);
         }
 
         public async Task<bool> TryRemoveFromQueue(string username)
         {
-            DeleteResult result = await _matchmakingCollection.DeleteOneAsync(x => x.UserName == username);
+            DeleteResult result = await _matchmakingCollection.DeleteManyAsync(x => x.UserName == username);
             return result.IsAcknowledged;
 
         }

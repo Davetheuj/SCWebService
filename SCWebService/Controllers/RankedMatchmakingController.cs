@@ -22,13 +22,13 @@ namespace SCWebService.Controllers
             
             JsonResult result = new JsonResult("");
 
-            if (mmUser != null)
+            if (mmUser == null)
             {
                 result.StatusCode = 204; //204 is no content but successful request
             }
             else
             {
-                result.Value = mmUser!.JoinCode;
+                result.Value = mmUser;
                 result.StatusCode = 200;
             }
 
@@ -43,7 +43,7 @@ namespace SCWebService.Controllers
         }
      
 
-        [HttpPost("/ranked_mm/remove_from_queue")]
+        [HttpPost("/ranked_mm/remove_from_queue/{username}")]
         public async Task<IActionResult> RemoveFromQueue(string username)
         {
             bool success = await _matchmakingService.TryRemoveFromQueue(username);
