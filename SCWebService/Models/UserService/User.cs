@@ -15,6 +15,7 @@ namespace SCWebService.Models.UserService
         public int wins { get; set; }
         public int losses { get; set; }
         public int draws { get; set; }
+        public int gems { get;set; }
         public BoardPreset[]? boardPresets { get; set; }
         public DateTime createdAt { get; set; }
         public DateTime updatedAt { get; set; }
