@@ -20,7 +20,6 @@ public class UserService
         {
             return null;
         }
-
         user.PurgeSecureData();
         return user;
     }
@@ -31,6 +30,10 @@ public class UserService
         x.userName == user.userName && 
         x.userPassword == user.userPassword)
         .FirstOrDefaultAsync();
+    }
+    public async Task<User?> GetAsyncSecure(string id)
+    {
+        return await _usersCollection.Find(x => x._id == id).FirstOrDefaultAsync();
     }
 
     public async Task CreateAsync(User newUser)

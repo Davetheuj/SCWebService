@@ -1,7 +1,7 @@
 
 # Summoners Chess Web Service
 
-This webservice is used for database operations for the game Summoners Chess available at: https://thirdpartition.itch.io/summoners-chess
+This webservice is used for database and matchmaking operations for the game Summoners Chess available at: https://thirdpartition.itch.io/summoners-chess
 
 If you have any questions, feel free to reach out at David.UnderwoodJett@Gmail.com
 
