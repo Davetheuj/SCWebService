@@ -122,12 +122,21 @@ namespace SCWebService.Controllers
                 var user = await _userService.GetAsyncSecure(userId!);
                 if (user == null) return NotFound();
 
+                //Update the user here
                 int gems = MatchSubmission.CalculateRewards(submission.Victory);
                 user.gems += gems;
                 if (submission.Ranked)
                 {
                     int mmrChange = MatchSubmission.CalculateMMRChange(submission.LocalMMR, submission.OppositionMMR, submission.Victory);
                     user.userMMR += mmrChange;
+                }
+                if (submission.Victory)
+                {
+                    user.wins += 1;
+                }
+                else
+                {
+                    user.losses += 1;
                 }
                 await _userService.UpdateAsyncSecure(user);
 

@@ -7,11 +7,49 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+        - main
   workflow_dispatch:
-
 jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build for testing
+        run: dotnet build --no-restore --configuration Release
+      
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage"
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: TestResults/
+      
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        if: success()
+        with:
+          file: ./TestResults/*/coverage.cobertura.xml
+
   build:
     runs-on: ubuntu-latest
+    needs: test  # This ensures tests pass before building for deployment
     permissions:
       contents: read #This is required for actions/checkout
 
