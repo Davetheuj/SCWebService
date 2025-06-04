@@ -67,12 +67,11 @@ jobs:
         webproj=$(find . -name "*.csproj" -exec grep -l 'Microsoft.NET.Sdk.Web' {} \;)
         echo "project=$webproj" >> "$GITHUB_OUTPUT"
 
-    - name: Build with dotnet
-      run: dotnet build "${{ steps.findproject.outputs.project }}" --configuration Release
-
-
     - name: Clean solution
       run: dotnet clean
+
+    - name: Build with dotnet
+      run: dotnet build "${{ steps.findproject.outputs.project }}" --configuration Release   
 
     - name: dotnet publish
       run: dotnet publish "${{ steps.findproject.outputs.project }}" -c Release -o ${{env.DOTNET_ROOT}}/myapp
