@@ -2,9 +2,9 @@
 using MongoDB.Driver;
 using SCWebService.Models.MatchmakingService;
 using SCWebService.MongoDBSettings;
-namespace SCWebService.Services
+namespace SCWebService.Services.Matchmaking
 {
-    public class RankedMatchmakingService
+    public class RankedMatchmakingService : IRankedMatchmakingService
     {
         private readonly IMongoCollection<RankedMatchmakingUser> _matchmakingCollection;
         public RankedMatchmakingService(IOptions<RankedMatchmakingSettings> mongoDBSettings)

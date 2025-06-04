@@ -1,5 +1,6 @@
 using DotNetEnv;
-using SCWebService.Services;
+using SCWebService.Services.Matchmaking;
+using SCWebService.Services.UserService;
 
 //Load variables from .env into Environment object
 Env.Load();

@@ -3,8 +3,8 @@ using MongoDB.Driver;
 using SCWebService.MongoDBSettings;
 using SCWebService.Models.UserService;
 
-namespace SCWebService.Services;
-public class UserService
+namespace SCWebService.Services.UserService;
+public class UserService : IUserService
 {
     private readonly IMongoCollection<User> _usersCollection;
     public UserService(IOptions<UserSettings> mongoDBSettings)

@@ -1,6 +1,6 @@
-﻿using SCWebService.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SCWebService.Models.UserService;
+using SCWebService.Services.UserService;
 
 namespace SCWebService.Controllers;
 

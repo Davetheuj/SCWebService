@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SCWebService.Models.MatchmakingService;
-using SCWebService.Services;
+using SCWebService.Services.Matchmaking;
+using SCWebService.Services.UserService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SCWebService.Controllers
 {
@@ -14,10 +14,10 @@ namespace SCWebService.Controllers
     public class RankedMatchmakingController : ControllerBase
     {
 
-        private readonly RankedMatchmakingService _matchmakingService;
-        private readonly UserService _userService;
+        private readonly IRankedMatchmakingService _matchmakingService;
+        private readonly IUserService _userService;
 
-        public RankedMatchmakingController(RankedMatchmakingService matchmakingService, UserService userService)
+        public RankedMatchmakingController(IRankedMatchmakingService matchmakingService, IUserService userService)
             {
                 _matchmakingService = matchmakingService;
                 _userService = userService;
