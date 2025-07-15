@@ -1,6 +1,6 @@
 ﻿using SCWebService.Models.UserService;
 
-namespace SCWebService.Services.UserService
+namespace SCWebService.Services
 {
     public interface IUserService
     {

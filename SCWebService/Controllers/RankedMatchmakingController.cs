@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using SCWebService.Models.MatchmakingService;
 using SCWebService.Services.Matchmaking;
-using SCWebService.Services.UserService;
+using SCWebService.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

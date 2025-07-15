@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SCWebService.Models.UserService;
-using SCWebService.Services.UserService;
+using SCWebService.Services;
 
 namespace SCWebService.Controllers;
 
@@ -8,9 +8,9 @@ namespace SCWebService.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public UserController(UserService mongoDBUserService) =>
+    public UserController(IUserService mongoDBUserService) =>
         _userService = mongoDBUserService;
 
 
