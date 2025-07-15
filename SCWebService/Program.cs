@@ -8,8 +8,8 @@ Env.Load();
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<RankedMatchmakingService>();
+builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IRankedMatchmakingService, RankedMatchmakingService>();
 
 builder.Services.AddControllers();
 
